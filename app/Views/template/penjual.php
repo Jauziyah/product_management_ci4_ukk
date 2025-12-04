@@ -44,7 +44,7 @@
 <nav id="sidebar">
     <h2>Penjual Panel</h2>
     <a href="/">Dashboard</a>
-    <a href="/product">Product</a>
+    <a href="/penjual/product">Product</a>
     <a href="/profile">Profile</a>
 </nav>
 
