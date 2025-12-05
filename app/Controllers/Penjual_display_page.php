@@ -34,7 +34,7 @@ class Penjual_display_page extends BaseController
         ];
 
         if (empty($data['produk'])){
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Tidak ada yang namanya' . $slug);
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Tidak ada yang namanya ' . $slug);
         }
         return view('penjual/detail_product', $data);
     }
@@ -50,6 +50,15 @@ class Penjual_display_page extends BaseController
         }
 
         return view('penjual/create_product', $data);
+    }
+    
+    public function edit_product($slug)
+    {
+        $data = [
+            'validation' => \Config\Services::validation(),
+            'produk' => $this->produk_model->get_detail_product($slug)
+        ];
+        return view('penjual/edit_produk', $data);
     }
 }
 

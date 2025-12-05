@@ -42,11 +42,12 @@
                     <td><?= $produk['stok'];?></td>
                     <td>
                         <a href="/penjual/product/<?= $produk['slug'];?>" class="btn btn-primary">Detail</a>
-                        <form action="">
+                        <form action="/penjual/product/<?= $produk['id'];?>">
                             <?= csrf_field();?>
                             <input type="hidden" name="_method" id="" value="DELETE">
-                            <a href="/penjual/product/<?= $produk['id'];?>" class="btn btn-danger">Delete</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
+                        <a href="/penjual/product/edit/<?= $produk['slug'];?>" class="btn btn-warning">Edit</a>
                     </td>
                 </tr>
             <?php endforeach ?>

@@ -17,6 +17,8 @@ class Penjual_product_delete extends BaseController
     public function index($id)
     {
         $this->produk_model->delete($id);
+        session()->setFlashdata('pesan', 'Selamat produk berhasil didelete');
         return redirect()->to('penjual/product');
+        
     }
 }

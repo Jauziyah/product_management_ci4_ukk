@@ -2,8 +2,9 @@
 
 <?= $this->section('content');?>
 
-<form action="/penjual/product/create" method="post">
+<form action="/penjual/product/update/<?= $produk['id'];?>" method="post">
     <?= csrf_field();?>
+        <input type="hidden" name="slug" value="<?= $produk['slug']; ?>">
 <div class="mb-3">
     <label for="" class="form-label" autofocus>Nama Produk</label>
     <input
@@ -13,7 +14,7 @@
         id="nama"
         aria-describedby="helpId"
         placeholder=""
-        value="<?= old('nama');?>"
+        value="<?= (old('nama')) ? old('nama') : $produk['nama'];?>"
     />
     <div class="invalid-feedback">
         <?= $validation->getError('nama');?>
@@ -26,7 +27,7 @@
         id="deskripsi"
         aria-describedby="helpId"
         placeholder=""
-        value="<?= old('deskripsi');?>"
+        value="<?= (old('deskripsi')) ? old('deskripsi') : $produk['deskripsi'];?>"
     />
         <div class="invalid-feedback">
         <?= $validation->getError('deskripsi');?>
@@ -39,7 +40,7 @@
         id="harga_asli"
         aria-describedby="helpId"
         placeholder=""
-        value="<?= old('harga_asli');?>"
+        value="<?= (old('harga_asli')) ? old('harga_asli') : $produk['harga_asli'];?>"
     />
         <div class="invalid-feedback">
         <?= $validation->getError('harga_asli');?>
@@ -52,12 +53,14 @@
         id="stok"
         aria-describedby="helpId"
         placeholder=""
+        value="<?= (old('stok')) ? old('stok') : $produk['stok'];?>"
     />
         <div class="invalid-feedback">
         <?= $validation->getError('stok');?>
     </div>
+    
 </div>
-<button type="submit" class="btn btn-primary">Request</button>
+<button type="submit" class="btn btn-primary">Update</button>
 </form>
 
 <?= $this->endSection('content');?>
