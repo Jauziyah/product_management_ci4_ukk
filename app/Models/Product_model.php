@@ -10,6 +10,7 @@ class Product_model extends Model
     protected $allowedFields    = ['nama', 'deskripsi', 'harga_asli', 'harga_kopsis', 'margin', 'stok', 'slug', 'image', 'created_at', 'updated_at'];
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
+    protected $useTimestamps = True;
 
     public function get_detail_product($slug)
     {

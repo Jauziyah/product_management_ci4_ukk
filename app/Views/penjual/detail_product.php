@@ -3,7 +3,7 @@
 <?= $this->section('content');;?>
 
 <div class="card">
-    <img class="card-img-top" src="<?= base_url('/uploads/' . $produk['image']);?>" alt="Title" />
+    <img class="card-img-top" src="<?= base_url('/uploads/' . $produk['image']);?>" alt="Title" style="width: 100px;"/>
     <div class="card-body">
         <h4 class="card-title"><?= $produk['nama'];?></h4>
         <p class="card-text">Text</p>

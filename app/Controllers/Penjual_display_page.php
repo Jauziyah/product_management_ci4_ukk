@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Product_model;
+use CodeIgniter\CodeIgniter;
+use Exception;
 
 class Penjual_display_page extends BaseController
 {
@@ -30,7 +32,16 @@ class Penjual_display_page extends BaseController
         $data = [
             'produk' =>  $this->produk_model->get_detail_product($slug)
         ];
+
+        if (empty($data['produk'])){
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Tidak ada yang namanya' . $slug);
+        }
         return view('penjual/detail_product', $data);
+    }
+
+    public function create_product()
+    {
+        return view('penjual/create_product');
     }
 }
 

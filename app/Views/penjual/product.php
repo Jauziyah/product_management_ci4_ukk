@@ -3,6 +3,18 @@
 <?= $this->section('content');;?>
 <h1>Product List</h1>
 
+<a href="/penjual/product/tambah" class="btn btn-primary">Tambah produk</a>
+
+<?php if(session()->getFlashdata('pesan')): ?>
+    <div
+        class="alert alert-primary"
+        role="alert"
+    >
+        <?= session()->getFlashdata('pesan');?>
+    </div>
+    
+<?php endif; ?>
+
 <div
     class="table-responsive"
 >
