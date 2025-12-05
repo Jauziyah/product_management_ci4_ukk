@@ -41,7 +41,15 @@ class Penjual_display_page extends BaseController
 
     public function create_product()
     {
-        return view('penjual/create_product');
+        $data = [
+            'validation' => \Config\Services::validation()
+        ];
+
+        if(session()->has('validation')){
+            $data['validation'] = session('validation');
+        }
+
+        return view('penjual/create_product', $data);
     }
 }
 

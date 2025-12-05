@@ -15,6 +15,23 @@ class Penjual_product_create extends BaseController
     }
     public function index()
     {
+        if (!$this->validate([
+            'nama' => [
+                'rules' => 'required',
+                'errors'=> [
+                    'required'=> '{field} Kudu diisi dongo'
+                ]
+            ],
+            'deskripsi' => 'required',
+            'harga_asli' => 'required',
+            'stok' => 'required',
+            'images' => 'required',
+        ])){
+
+            $validation = \Config\Services::validation();
+            return redirect()->to('penjual/product/tambah')->withInput()->with('validation', $validation);
+        }
+
         $slug = url_title($this->request->getVar('nama'), '-', true);
         $harga_asli = $this->request->getVar('harga_asli');
         $harga_kopsis = $harga_asli * 1.2;

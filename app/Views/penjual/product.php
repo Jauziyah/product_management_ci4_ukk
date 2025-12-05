@@ -40,7 +40,14 @@
                     <td><?= $produk['nama'];?></td>
                     <td><?= $produk['harga_asli'];?></td>
                     <td><?= $produk['stok'];?></td>
-                    <td><a href="/penjual/product-<?= $produk['slug'];?>" class="btn btn-primary">Detail</a></td>
+                    <td>
+                        <a href="/penjual/product/<?= $produk['slug'];?>" class="btn btn-primary">Detail</a>
+                        <form action="">
+                            <?= csrf_field();?>
+                            <input type="hidden" name="_method" id="" value="DELETE">
+                            <a href="/penjual/product/<?= $produk['id'];?>" class="btn btn-danger">Delete</a>
+                        </form>
+                    </td>
                 </tr>
             <?php endforeach ?>
         </tbody>
