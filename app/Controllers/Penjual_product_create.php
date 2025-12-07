@@ -25,11 +25,14 @@ class Penjual_product_create extends BaseController
             'deskripsi' => 'required',
             'harga_asli' => 'required',
             'stok' => 'required',
-            'images' => 'required',
+            'image' => [
+                'rules' => 'uploaded[image]',
+                'errors' => [
+                    'uploaded' => 'Image kudu diupload dongo'
+                ]
+            ],
         ])){
-
-            $validation = \Config\Services::validation();
-            return redirect()->to('penjual/product/tambah')->withInput()->with('validation', $validation);
+            return redirect()->to('penjual/product/tambah')->withInput();
         }
 
         $slug = url_title($this->request->getVar('nama'), '-', true);
