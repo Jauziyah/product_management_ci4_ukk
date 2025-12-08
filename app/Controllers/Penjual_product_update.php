@@ -16,25 +16,38 @@ class Penjual_product_update extends BaseController{
     public function index($id)
     {
 
-        $old_name = $this->produk_model->get_detail_product($this->request->getVar('slug'));
-        if ($old_name['nama'] == $this->request->getVar('nama')){
-            $rule_judul = 'required';
-        } else{
-            $rule_judul = 'required';
-        }
         if (!$this->validate([
             'nama' => [
-                'rules' => $rule_judul,
-                'errors'=> [
-                    'required'=> '{field} Kudu diisi dongo'
+                'rules' => 'required',
+                'errors' => [
+                    'required' => '{field} Kudu diisi dongo'
                 ]
-            ]
-        ])){
-
-            $validation = \Config\Services::validation();
-            return redirect()->to('penjual/product/tambah')->withInput()->with('validation', $validation);
+            ],
+            'deskripsi' => 'required',
+            'harga_asli' => 'required',
+            'stok' => 'required',
+            'image' => [
+                'rules' => 'max_size[image, 2045]',
+                'errors' => [
+                    'uploaded' => 'Image kudu diupload dongo'
+                ]
+            ],
+        ])) {
+            $data = [
+                'validation' => $this->validator  // ← pass current validator instance
+            ];
+            return view('penjual/create_product', $data);
         }
 
+        $produk_image = $this->request->getFile('image');
+
+        if($produk_image->getError() == 4){
+            $produk_image_name = $this->request->getVar('old_image');
+        } else{
+            $produk_image_name = $produk_image->getRandomName();
+            $produk_image->move('uploads/product', $produk_image_name);
+            unlink('uploads/product/' . $this->request->getVar('old_image'));
+        }
 
         $slug = url_title($this->request->getVar('nama'), '-', true);
         $harga_asli = $this->request->getVar('harga_asli');
@@ -49,6 +62,7 @@ class Penjual_product_update extends BaseController{
             'slug' => $slug,
             'margin' => $harga_kopsis - $harga_asli,
             'stok' => $this->request->getVar('stok'),
+            'image' =>$produk_image_name
         ]);
 
         session()->setFlashdata('pesan', 'Selamat produk berhasil diedit');
