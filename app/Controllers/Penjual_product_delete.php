@@ -16,6 +16,12 @@ class Penjual_product_delete extends BaseController
 
     public function index($id)
     {
+       
+        $produk = $this->produk_model->find($id);
+         if ($produk['image'] != 'default_produk.jpg'){
+            unlink('uploads/product/' . $produk['image']);
+         }
+        
         $this->produk_model->delete($id);
         session()->setFlashdata('pesan', 'Selamat produk berhasil didelete');
         return redirect()->to('penjual/product');
