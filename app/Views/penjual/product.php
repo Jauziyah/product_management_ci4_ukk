@@ -36,7 +36,7 @@
             <?php foreach($list_produk as $produk): ?>
                 <tr>
                     <td><?= $i++;?></td>
-                    <td><img src="<?= base_url('uploads/' . $produk['image']);?>" alt="" style="width: 70px;"></td>
+                    <td><img src="<?= base_url('uploads/product/' . $produk['image']);?>" alt="" style="width: 70px;"></td>
                     <td><?= $produk['nama'];?></td>
                     <td><?= $produk['harga_asli'];?></td>
                     <td><?= $produk['stok'];?></td>

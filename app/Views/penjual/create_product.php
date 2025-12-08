@@ -58,12 +58,15 @@
                 type="file"
                 class="form-control <?= $validation->hasError('image') ? 'is-invalid' : ''; ?>"
                 name="image"
-                id="image"
+                id="produk-thumbnail"
                 placeholder=""
-                aria-describedby="fileHelpId" />
+                aria-describedby="fileHelpId"
+                onchange="preview_produk_image()"
+                 />
             <div class="invalid-feedback">
                 <?= $validation->getError('image'); ?>
             </div>
+            <img src="/uploads/product/default_produk.jpg" alt="" class="product-preview">
             <div id="fileHelpId" class="form-text">No big, no strange file</div>
         </div>
     </div>

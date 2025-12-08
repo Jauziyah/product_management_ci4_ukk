@@ -9,17 +9,21 @@ use App\Models\Product_model;
 class Penjual_product_create extends BaseController
 {
     protected $produk_model;
+    protected $validation;
     public function __construct()
     {
         $this->produk_model = new Product_model();
+        $this->validation =  \Config\Services::validation();
     }
     public function index()
+
     {
+
         if (!$this->validate([
             'nama' => [
                 'rules' => 'required',
-                'errors'=> [
-                    'required'=> '{field} Kudu diisi dongo'
+                'errors' => [
+                    'required' => '{field} Kudu diisi dongo'
                 ]
             ],
             'deskripsi' => 'required',
@@ -31,8 +35,19 @@ class Penjual_product_create extends BaseController
                     'uploaded' => 'Image kudu diupload dongo'
                 ]
             ],
-        ])){
-            return redirect()->to('penjual/product/tambah')->withInput();
+        ])) {
+            $data = [
+                'validation' => $this->validator  // ← pass current validator instance
+            ];
+            return view('penjual/create_product', $data);
+        }
+
+        $produk_image = $this->request->getFile('image');
+        $produk_image_name = $produk_image->getRandomName();
+        $produk_image->move('uploads/product', $produk_image_name);
+
+        if ($produk_image->getError() == 4){
+            $produk_image_name = 'default_produk.jpg';
         }
 
         $slug = url_title($this->request->getVar('nama'), '-', true);
@@ -42,11 +57,11 @@ class Penjual_product_create extends BaseController
             'nama' => $this->request->getVar('nama'),
             'deskripsi' => $this->request->getVar('deskripsi'),
             'harga_asli' => $this->request->getVar('harga_asli'),
-            'harga_kopsis' => $harga_kopsis,    
+            'harga_kopsis' => $harga_kopsis,
             'slug' => $slug,
             'margin' => $harga_kopsis - $harga_asli,
             'stok' => $this->request->getVar('stok'),
-            'image' => $this->request->getVar('image')
+            'image' => $produk_image_name
         ]);
 
         session()->setFlashdata('pesan', 'Selamat produk berhasil ditambah');
