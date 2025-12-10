@@ -49,6 +49,7 @@
         <a href="/">Dashboard</a>
         <a href="/penjual/product">Product</a>
         <a href="/profile">Profile</a>
+        <a href="/users">Users</a>
     </nav>
 
     <div class="container">

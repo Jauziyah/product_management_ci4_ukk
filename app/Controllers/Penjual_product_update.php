@@ -34,7 +34,7 @@ class Penjual_product_update extends BaseController{
             ],
         ])) {
             $data = [
-                'validation' => $this->validator  // ← pass current validator instance
+                'validation' => $this->validator 
             ];
             return view('penjual/create_product', $data);
         }

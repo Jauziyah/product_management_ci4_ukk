@@ -18,3 +18,6 @@ $routes->get('/penjual/product/(:num)', 'Penjual_product_delete::index/$1'); // 
 $routes->get('/penjual/product/(:any)', 'Penjual_display_page::detail_produk/$1'); //detail product
 $routes->post('/penjual/product/create', 'Penjual_product_create::index'); // create
 $routes->post('/penjual/product/update/(:num)', 'Penjual_product_update::index/$1'); // edit
+
+//  <-----------------Users Page Display------------------>
+$routes->get('/users', 'Penjual_display_page::users');

@@ -3,16 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Database\Migrations\Users;
 use App\Models\Product_model;
+use App\Models\Users_model;
 use CodeIgniter\CodeIgniter;
 use Exception;
 
 class Penjual_display_page extends BaseController
 {
     protected $produk_model;
+    protected $user_model;
     public function __construct()
     {
         $this->produk_model = new Product_model();
+        $this->user_model = new Users_model();
     }
     public function index()
     {
@@ -54,6 +58,17 @@ class Penjual_display_page extends BaseController
             'produk' => $this->produk_model->get_detail_product($slug)
         ];
         return view('penjual/edit_produk', $data);
+    }
+
+    public function users()
+    {
+        $current_page = $this->request->getVar('page_users') ? $this->request->getVar('page_users') : 1;
+        $data = [
+            'users' => $this->user_model->paginate(7, 'users'),
+            'pager' => $this->user_model->pager,
+            'current_page' => $current_page
+        ];
+        return view('penjual/users', $data);
     }
 }
 
