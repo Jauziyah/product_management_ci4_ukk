@@ -2,6 +2,17 @@
 
 <?= $this->section('content'); ?>
 
+<h1>List Uwong</h1>
+
+<form action="" method="get">
+<div class="input-group">
+    <input type="text" class="form-control" placeholder="masukkan" name="keyword_users">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="submit" name="submit">Cari</button>
+    </div>
+</div>
+</form>
+
 <div
     class="table-responsive">
     <table
@@ -14,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i = 1 + (6 * ($current_page -1)); ?>
+            <?php $i = 1 + (6 * ($current_page - 1)); ?>
             <?php foreach ($users as $user): ?>
                 <tr class="">
                     <td><?= $i++; ?></td>
@@ -24,7 +35,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?= $pager->links('users', 'users_pagination');?>
+    <?= $pager->links('users', 'users_pagination'); ?>
 </div>
 
 

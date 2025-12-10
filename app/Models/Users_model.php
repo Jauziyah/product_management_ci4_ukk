@@ -12,6 +12,15 @@ class Users_model extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    public function search_user($keyword)
+    {
+        // $builder = $this->table('users');
+        // $builder->like('name', $keyword);
+        // return $builder;
+
+        return $this->table('users')->like('name', $keyword);
+    }
+
 }
 
 

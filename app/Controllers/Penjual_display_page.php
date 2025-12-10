@@ -63,10 +63,19 @@ class Penjual_display_page extends BaseController
     public function users()
     {
         $current_page = $this->request->getVar('page_users') ? $this->request->getVar('page_users') : 1;
+        $keyword = $this->request->getVar('keyword_users');
+
+        if($keyword){
+            $user = $this->user_model->search_user($keyword);
+        } else{
+            $user = $this->user_model;
+        }
+
         $data = [
-            'users' => $this->user_model->paginate(7, 'users'),
+            'users' => $user->paginate(7, 'users'),
             'pager' => $this->user_model->pager,
-            'current_page' => $current_page
+            'current_page' => $current_page,
+            'keyword' => $keyword
         ];
         return view('penjual/users', $data);
     }
