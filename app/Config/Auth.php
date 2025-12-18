@@ -441,6 +441,12 @@ class Auth extends ShieldAuth
      */
     public function loginRedirect(): string
     {
+        if (auth()->user()->can('admin.access')){
+            return '/admin';
+        };
+        if (auth()->user()->can('user.access')){
+            return '/penjual';
+        };
         $session = session();
         $url     = $session->getTempdata('beforeLoginUrl') ?? setting('Auth.redirects')['login'];
 

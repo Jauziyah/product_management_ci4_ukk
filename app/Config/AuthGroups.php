@@ -75,6 +75,7 @@ class AuthGroups extends ShieldAuthGroups
         'admin.access'        => 'Can access the sites admin area',
         'admin.settings'      => 'Can access the main site settings',
         'users.manage-admins' => 'Can manage other admins',
+        'users.access'        => 'Can access penjual page',
         'users.create'        => 'Can create new non-admin users',
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
@@ -109,7 +110,9 @@ class AuthGroups extends ShieldAuthGroups
             'users.edit',
             'beta.access',
         ],
-        'user' => [],
+        'user' => [
+            'user.access'
+        ],
         'beta' => [
             'beta.access',
         ],
