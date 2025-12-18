@@ -11,7 +11,7 @@
 <h1>Es soll dashboard zeigen</h1>
 
     <a class="btn btn-primary" href="/penjual">Penjual</a>
-    <a class="btn btn-primary">Admin</a>
+    <a class="btn btn-primary" href="/admin">Admin</a>
 
 <script src="<?= base_url('bootstrap/bootstrap.min.js');?>"></script>
 </body>
